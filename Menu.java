@@ -28,6 +28,7 @@ public class Menu {
 				break;
 			if (option == 1)
 				shop.printProducts();
+
 			if (option == 3) {
 				System.out.println("Enter the item to search for:");
 				String itemToFind = getNextStringLineFromUser();
