@@ -1,27 +1,34 @@
+import java.util.ArrayList;
+
 public class Shop {
-	private Product[] products;
+	private String name;
+	private ArrayList<Product> products;
 
 	public Shop() {
 		
 	}
 
-	public Shop(Product[] products) {
+	public Shop(String name, ArrayList<Product> products) {
+		this.name = name;
 		this.products = products;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public void printProducts() {
 		System.out.println("--Products--");
-		for (int i = 0; i < products.length; i++) {
-			System.out.print("ID " + i + ": ");
-			System.out.printf("%s - $%.2f%n" , products[i].getName(), products[i].getPrice());
+		for (Product product : products) {
+			System.out.printf("ID %d: %s - $%.2f%n" , product.getID(), product.getName(), product.getPrice());
 		}
 	}
 	
 	public int findProduct(String searchText) {
 		int id = -1;
-		for (int i = 0; i < products.length; i++) {
-			if (searchText.equals(products[i].getName()))
-				id = i;
+		for (Product product : products) {
+			if (searchText.equals(product.getName()))
+				id = product.getID();
 		}
 		return id;
 	}

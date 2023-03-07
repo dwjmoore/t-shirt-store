@@ -47,7 +47,7 @@ public class Menu {
 	public void greet() {
 		System.out.println("Hello. Please enter your name:");
 		String name = scanner.nextLine();
-		System.out.println("Welcome " + name + " to " + "T-Shirt Mart");
+		System.out.println("Welcome " + name + " to " + shop.getName());
 	}
 
 	private void printMenu() {
