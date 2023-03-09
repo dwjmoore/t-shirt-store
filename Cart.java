@@ -28,7 +28,7 @@ public class Cart {
 			}
 			System.out.println();
 			System.out.printf("Pre-Tax Total: $%.2f%n", total);
-			System.out.printf("Post-Tax Total: $%.2f%n", total * (1 + taxRate));
+			System.out.printf("Post-Tax Total (%.2f%% Tax): $%.2f%n", taxRate * 100, total * (1 + taxRate));
 		}
 	}
 
