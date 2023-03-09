@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Cart {
-	Shop shop;
+	private Shop shop;
 	
 	private ArrayList<Product> items = new ArrayList<Product>();
 	private double total = 0;
