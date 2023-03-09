@@ -55,6 +55,9 @@ public class Menu {
 					System.out.println("That product was not found.");
 				}
 			}
+
+			if (option == 4)
+					cart.showDetails();
 		}
 
 		exit();
