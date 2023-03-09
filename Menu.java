@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 	private Shop shop;
+	
 
 	private String[] menuOptions = {
 			"Exit",
@@ -26,15 +27,28 @@ public class Menu {
 
 			if (option == 0)
 				break;
+			
 			if (option == 1)
 				shop.printProducts();
-
+			
+			if (option == 2) {
+				System.out.println("Please enter the ID of the product you would like to purchase:");
+				int productID = getNextIntFromUser();
+				Product product = shop.getProductByID(productID);
+				if (product != null) {
+					// Need to build out action to add item to cart. Need to access Cart class.
+					System.out.printf("%s has been added to your cart.%n", product.getName());
+				} else {
+					System.out.println("That item ID is invalid and could not be added to the cart.");
+				}
+			}
+			
 			if (option == 3) {
 				System.out.println("Enter the item to search for:");
 				String itemToFind = getNextStringLineFromUser();
-				int productId = shop.findProduct(itemToFind);
-				if (productId != -1) {
-					System.out.println(itemToFind + " was found and its product id is " + productId);
+				int productID = shop.findProduct(itemToFind);
+				if (productID != -1) {
+					System.out.println(itemToFind + " was found and its product id is " + productID);
 				} else {
 					System.out.println("That product was not found.");
 				}
