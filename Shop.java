@@ -42,5 +42,4 @@ public class Shop {
 		}
 		return item;
 	}
-	
 }
