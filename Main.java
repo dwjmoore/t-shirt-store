@@ -17,10 +17,11 @@ class Main {
 		products.add(polo);
 		products.add(boatNeck);
 		products.add(tankTop);
-		
+
 		Shop shop = new Shop("T-Shirt Mart", products);
+		Cart cart = new Cart();
+		Menu menu = new Menu(new Scanner(new InputStreamReader(System.in, Charset.forName("UTF-8"))), shop, cart);
 		
-		Menu menu = new Menu(new Scanner(new InputStreamReader(System.in, Charset.forName("UTF-8"))), shop);
 		
 		menu.greet();
 		menu.executeMenu();

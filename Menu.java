@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 	private Shop shop;
+	private Cart cart;
 	
 
 	private String[] menuOptions = {
@@ -15,9 +16,10 @@ public class Menu {
 
 	private Scanner scanner;
 
-	public Menu(Scanner scanner, Shop shop) {
+	public Menu(Scanner scanner, Shop shop, Cart cart) {
 		this.scanner = scanner;
 		this.shop = shop;
+		this.cart = cart;
 	}
 
 	public void executeMenu() {
@@ -36,7 +38,7 @@ public class Menu {
 				int productID = getNextIntFromUser();
 				Product product = shop.getProductByID(productID);
 				if (product != null) {
-					// Need to build out action to add item to cart. Need to access Cart class.
+					cart.addItem(product);
 					System.out.printf("%s has been added to your cart.%n", product.getName());
 				} else {
 					System.out.println("That item ID is invalid and could not be added to the cart.");
