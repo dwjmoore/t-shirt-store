@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Menu {
 	private Shop shop;
 	private Cart cart;
-	
 
 	private String[] menuOptions = {
 			"Exit",
@@ -29,10 +28,10 @@ public class Menu {
 
 			if (option == 0)
 				break;
-			
+
 			if (option == 1)
 				shop.printProducts();
-			
+
 			if (option == 2) {
 				System.out.println("Please enter the ID of the product you would like to purchase:");
 				int productID = getNextIntFromUser();
@@ -44,7 +43,7 @@ public class Menu {
 					System.out.println("That item ID is invalid and could not be added to the cart.");
 				}
 			}
-			
+
 			if (option == 3) {
 				System.out.println("Enter the item to search for:");
 				String itemToFind = getNextStringLineFromUser();
@@ -57,7 +56,10 @@ public class Menu {
 			}
 
 			if (option == 4)
-					cart.showDetails();
+				cart.showDetails();
+
+			if (option == 5)
+				cart.checkout();
 		}
 
 		exit();

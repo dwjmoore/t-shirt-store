@@ -19,7 +19,7 @@ class Main {
 		products.add(tankTop);
 
 		Shop shop = new Shop("T-Shirt Mart", products);
-		Cart cart = new Cart();
+		Cart cart = new Cart(shop);
 		Menu menu = new Menu(new Scanner(new InputStreamReader(System.in, Charset.forName("UTF-8"))), shop, cart);
 		
 		
