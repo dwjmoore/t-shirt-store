@@ -1,19 +1,16 @@
 import java.util.ArrayList;
 
 public class Cart {
-	private Shop shop;
-	
 	private ArrayList<Product> items = new ArrayList<Product>();
 	private double total = 0;
 	private double taxRate = 0.1;
 
-	public Cart(Shop shop) {
-		this.shop = shop;
-	}
+	public Cart() {}
 
 	public void addItem(Product product) {
 		items.add(product);
 		total += product.getPrice();
+		System.out.printf("%s has been added to your cart.%n", product.getName());
 	}
 
 	public void showDetails() {
@@ -37,7 +34,6 @@ public class Cart {
 			System.out.println("Your cart is currently empty. Please add at least one product to check out.");
 		} else {
 			System.out.printf("Your total is $%.2f%n", total * (1 + taxRate));
-			System.out.printf("Thank you for shopping at %s.%n", shop.getName());
 			total = 0;
 			items.removeAll(items);
 		}

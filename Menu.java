@@ -38,7 +38,6 @@ public class Menu {
 				Product product = shop.getProductByID(productID);
 				if (product != null) {
 					cart.addItem(product);
-					System.out.printf("%s has been added to your cart.%n", product.getName());
 				} else {
 					System.out.println("That item ID is invalid and could not be added to the cart.");
 				}
@@ -49,7 +48,7 @@ public class Menu {
 				String itemToFind = getNextStringLineFromUser();
 				int productID = shop.findProduct(itemToFind);
 				if (productID != -1) {
-					System.out.println(itemToFind + " was found and its product id is " + productID);
+					System.out.printf("%s was found and its product id is %d", itemToFind, productID);
 				} else {
 					System.out.println("That product was not found.");
 				}
@@ -58,8 +57,10 @@ public class Menu {
 			if (option == 4)
 				cart.showDetails();
 
-			if (option == 5)
+			if (option == 5) {
 				cart.checkout();
+				System.out.printf("Thank you for shopping at %s.%n", shop.getName());
+			}
 		}
 
 		exit();
@@ -68,7 +69,7 @@ public class Menu {
 	public void greet() {
 		System.out.println("Hello. Please enter your name:");
 		String name = scanner.nextLine();
-		System.out.println("Welcome " + name + " to " + shop.getName());
+		System.out.printf("Welcome %s to %s", name, shop.getName());
 	}
 
 	private void printMenu() {
