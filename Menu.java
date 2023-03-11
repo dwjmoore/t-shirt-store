@@ -58,8 +58,11 @@ public class Menu {
 				cart.showDetails();
 
 			if (option == 5) {
-				cart.checkout();
-				System.out.printf("Thank you for shopping at %s.%n", shop.getName());
+				if (cart.checkout()) {
+					System.out.printf("Thank you for shopping at %s.%n", shop.getName());
+				} else {
+					System.out.println("Your cart is currently empty. Please add at least one product to check out.");
+				}
 			}
 		}
 

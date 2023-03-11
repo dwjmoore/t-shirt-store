@@ -25,13 +25,14 @@ public class Cart {
 		System.out.print(detailsSB);
 	}
 
-	public void checkout() {
+	public boolean checkout() {
 		if (items.isEmpty()) {
-			System.out.println("Your cart is currently empty. Please add at least one product to check out.");
+			return false;
 		} else {
 			System.out.printf("Your total is $%.2f%n", total * (1 + taxRate));
 			total = 0;
-			items.removeAll(items);
+			items.clear();
+			return true;
 		}
 	}
 
