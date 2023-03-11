@@ -14,7 +14,7 @@ public class Shop {
 	}
 
 	public void printProducts() {
-		StringBuilder printSB = new StringBuilder(String.format("--Products--%n"));
+		StringBuilder printSB = new StringBuilder(String.format("%n--Products--%n"));
 		for (Product product : products) {
 			printSB.append(String.format("ID %d: %s - $%.2f%n" , product.getID(), product.getName(), product.getPrice()));
 		}

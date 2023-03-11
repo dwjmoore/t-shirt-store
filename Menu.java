@@ -22,17 +22,35 @@ public class Menu {
 	}
 
 	public void executeMenu() {
-		while (true) {
-			printMenu();
-			int option = getNextIntFromUser();
+		printMenu();
+		int option = getNextIntFromUser();
+		handleShopperOptionSelection(option);
+		exit();
+	}
 
-			if (option == 0)
-				break;
+	public void greet() {
+		System.out.println("Hello. Please enter your name:");
+		String name = scanner.nextLine();
+		System.out.printf("%nWelcome %s to %s%n", name, shop.getName());
+	}
 
-			if (option == 1)
+	private void printMenu() {
+		StringBuilder printMenuSB = new StringBuilder();
+		printMenuSB.append(String.format("%n--Main Menu--%n"));
+		printMenuSB.append(String.format("Select an option using one of the numbers shown%n%n"));
+		for (int i = 0; i < menuOptions.length; i++) {
+			printMenuSB.append(String.format("%d: %s%n", i, menuOptions[i]));
+		}
+		System.out.print(printMenuSB);
+	}
+
+	private void handleShopperOptionSelection(int option) {
+		while (option != 0) {
+			if (option == 1) {
 				shop.printProducts();
+			}
 
-			if (option == 2) {
+			else if (option == 2) {
 				System.out.println("Please enter the ID of the product you would like to purchase:");
 				int productID = getNextIntFromUser();
 				Product product = shop.getProductByID(productID);
@@ -43,7 +61,7 @@ public class Menu {
 				}
 			}
 
-			if (option == 3) {
+			else if (option == 3) {
 				System.out.println("Enter the item to search for:");
 				String itemToFind = getNextStringLineFromUser();
 				int productID = shop.findProduct(itemToFind);
@@ -54,36 +72,22 @@ public class Menu {
 				}
 			}
 
-			if (option == 4)
+			else if (option == 4) {
 				cart.showDetails();
-
-			if (option == 5) {
+			} else if (option == 5) {
 				if (cart.checkout()) {
 					System.out.printf("Thank you for shopping at %s.%n", shop.getName());
 				} else {
 					System.out.println("Your cart is currently empty. Please add at least one product to check out.");
 				}
 			}
-		}
 
-		exit();
-	}
+			else {
+				System.out.println("Selection not valid.");
+			}
 
-	public void greet() {
-		System.out.println("Hello. Please enter your name:");
-		String name = scanner.nextLine();
-		System.out.printf("Welcome %s to %s", name, shop.getName());
-	}
-
-	private void printMenu() {
-		System.out.println();
-		System.out.println("--Main Menu--");
-		System.out.println("Select an option using one of the numbers shown");
-		System.out.println();
-
-		for (int i = 0; i < menuOptions.length; i++) {
-			System.out.print(i + ": ");
-			System.out.println(menuOptions[i]);
+			printMenu();
+			option = getNextIntFromUser();
 		}
 	}
 
