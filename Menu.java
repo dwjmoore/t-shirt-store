@@ -24,7 +24,11 @@ public class Menu {
 	public void executeMenu() {
 		printMenu();
 		int option = getNextIntFromUser();
-		handleShopperOptionSelection(option);
+		while (option != 0) {
+			handleShopperOptionSelection(option);
+			printMenu();
+			option = getNextIntFromUser();
+		}
 		exit();
 	}
 
@@ -45,55 +49,49 @@ public class Menu {
 	}
 
 	private void handleShopperOptionSelection(int option) {
-		while (option != 0) {
-			if (option == 1) {
-				shop.printProducts();
-			}
-
-			else if (option == 2) {
-				System.out.println("Please enter the ID of the product you would like to purchase:");
-				int productID = getNextIntFromUser();
-				Product product = shop.getProductByID(productID);
-				if (product != null) {
-					cart.addItem(product);
-				} else {
-					System.out.println("That item ID is invalid and could not be added to the cart.");
-				}
-			}
-
-			else if (option == 3) {
-				System.out.println("Enter the item to search for:");
-				String itemToFind = getNextStringLineFromUser();
-				int productID = shop.findProduct(itemToFind);
-				if (productID != -1) {
-					System.out.printf("%s was found and its product id is %d", itemToFind, productID);
-				} else {
-					System.out.println("That product was not found.");
-				}
-			}
-
-			else if (option == 4) {
-				cart.showDetails();
-			} else if (option == 5) {
-				if (cart.checkout()) {
-					System.out.printf("Thank you for shopping at %s.%n", shop.getName());
-				} else {
-					System.out.println("Your cart is currently empty. Please add at least one product to check out.");
-				}
-			}
-
-			else {
-				System.out.println("Selection not valid.");
-			}
-
-			printMenu();
-			option = getNextIntFromUser();
+		if (option == 1) {
+			shop.printProducts();
+		} else if (option == 2) {
+			addItemToCart();
+		} else if (option == 3) {
+			findProduct();
+		} else if (option == 4) {
+			cart.showDetails();
+		} else if (option == 5) {
+			checkout();
+		} else {
+			System.out.println("Selection not valid.");
 		}
 	}
 
-	private void exit() {
-		System.out.println("Exiting now. Goodbye.");
-		scanner.close();
+	private void addItemToCart() {
+		System.out.println("Please enter the ID of the product you would like to purchase:");
+		int productID = getNextIntFromUser();
+		Product product = shop.getProductByID(productID);
+		if (product != null) {
+			cart.addItem(product);
+		} else {
+			System.out.println("That item ID is invalid and could not be added to the cart.");
+		}
+	}
+
+	private void findProduct() {
+		System.out.println("Enter the item to search for:");
+		String itemToFind = getNextStringLineFromUser();
+		int productID = shop.findProduct(itemToFind);
+		if (productID != -1) {
+			System.out.printf("%s was found and its product id is %d", itemToFind, productID);
+		} else {
+			System.out.println("That product was not found.");
+		}
+	}
+
+	private void checkout() {
+		if (cart.checkout()) {
+			System.out.printf("Thank you for shopping at %s.%n", shop.getName());
+		} else {
+			System.out.println("Your cart is currently empty. Please add at least one product to check out.");
+		}
 	}
 
 	private int getNextIntFromUser() {
@@ -103,5 +101,10 @@ public class Menu {
 	private String getNextStringLineFromUser() {
 		scanner.nextLine();
 		return scanner.nextLine();
+	}
+
+	private void exit() {
+		System.out.println("Exiting now. Goodbye.");
+		scanner.close();
 	}
 }
