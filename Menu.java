@@ -3,16 +3,6 @@ import java.util.Scanner;
 public class Menu {
 	private Shop shop;
 	private Cart cart;
-
-	private String[] menuOptions = {
-			"Exit",
-			"List Products",
-			"Buy Product",
-			"Find Product",
-			"Show Cart",
-			"Checkout"
-	};
-
 	private Scanner scanner;
 
 	public Menu(Scanner scanner, Shop shop, Cart cart) {
@@ -23,11 +13,11 @@ public class Menu {
 
 	public void executeMenu() {
 		printMenu();
-		int option = getNextIntFromUser();
-		while (option != 0) {
-			handleShopperOptionSelection(option);
+		MenuOption optionSelected = getNextOptionFromUser();
+		while (optionSelected != MenuOption.EXIT) {
+			handleShopperOptionSelection(optionSelected);
 			printMenu();
-			option = getNextIntFromUser();
+			optionSelected = getNextOptionFromUser();
 		}
 		exit();
 	}
@@ -42,26 +32,19 @@ public class Menu {
 		StringBuilder printMenuSB = new StringBuilder();
 		printMenuSB.append(String.format("%n--Main Menu--%n"));
 		printMenuSB.append(String.format("Select an option using one of the numbers shown%n%n"));
-		for (int i = 0; i < menuOptions.length; i++) {
-			printMenuSB.append(String.format("%d: %s%n", i, menuOptions[i]));
+		for (MenuOption option : MenuOption.values()) {
+			printMenuSB.append(String.format("%d: %s%n", option.getId(), option.getDisplayValue()));
 		}
 		System.out.print(printMenuSB);
 	}
 
-	private void handleShopperOptionSelection(int option) {
-		if (option == 1) {
-			shop.printProducts();
-		} else if (option == 2) {
-			addItemToCart();
-		} else if (option == 3) {
-			findProduct();
-		} else if (option == 4) {
-			cart.showDetails();
-		} else if (option == 5) {
-			checkout();
-		} else {
-			System.out.println("Selection not valid.");
-		}
+	private void handleShopperOptionSelection(MenuOption option) {
+		if (option == MenuOption.LIST_PRODUCTS) shop.printProducts();
+		if (option == MenuOption.BUY_PRODUCT) addItemToCart();
+		if (option == MenuOption.FIND_PRODUCT) findProduct();
+		if (option == MenuOption.SHOW_CART) cart.showDetails();
+		if (option == MenuOption.CHECKOUT) checkout();
+		if (option == null) System.out.println("Selection is not valid.");
 	}
 
 	private void addItemToCart() {
@@ -92,6 +75,10 @@ public class Menu {
 		} else {
 			System.out.println("Your cart is currently empty. Please add at least one product to check out.");
 		}
+	}
+
+	private MenuOption getNextOptionFromUser() {
+		return MenuOption.fromOptionId(getNextIntFromUser());
 	}
 
 	private int getNextIntFromUser() {
