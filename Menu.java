@@ -82,6 +82,10 @@ public class Menu {
 	}
 
 	private int getNextIntFromUser() {
+		while (!scanner.hasNextInt()) {
+			System.out.println("Selection not valid. Try again.");
+			scanner.next();
+		}
 		return scanner.nextInt();
 	}
 
